@@ -48,6 +48,8 @@ def loggedIn():
 
 @app.route("/logout")
 def logout():
+    if len(session.keys()) == 0:
+        return render_template("home.html")
     session.pop(app.secret_key)
     return redirect(url_for("foo"))
 
