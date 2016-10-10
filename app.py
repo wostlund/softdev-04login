@@ -13,12 +13,18 @@ def foo():
 
 @app.route("/reg", methods=['POST'])
 def register():
+    if request.form["submit"] == "log":
+        return auth()
     if len(session.keys()) != 0:
         return redirect(url_for("loggedIn"))
     h = hashlib.md5()
     mark = utils.login.createDict()
     if request.form["user"] in mark:
-        return render_template("home.html", message="username already taken")
+        return render_template("home.html", message="Username already taken")
+    elif request.form["user"] == "":
+        return render_template("home.html", message="Blank username not allowed")
+    elif request.form["password"] == "":
+        return render_template("home.html", message="Blank password not allowed")
     h.update(request.form["password"])
     utils.login.addUser(request.form["user"], h.hexdigest())
     return render_template("home.html", title="Login", message="Successfully registered")
@@ -33,7 +39,7 @@ def auth():
     h =hashlib.md5()
     h.update(passw)
     if users not in a.keys():
-        return render_template("home.html",message="Incorrect username")
+        return render_template("home.html",message="Username not found")
     elif h.hexdigest() != a[users]:
         return render_template("home.html",message="Incorrect password")
     else:
@@ -48,6 +54,8 @@ def loggedIn():
 
 @app.route("/logout")
 def logout():
+    if len(session.keys()) == 0:
+        return redirect(url_for("foo"))
     session.pop(app.secret_key)
     return redirect(url_for("foo"))
 

@@ -4,17 +4,13 @@
     <title>Homepage</title>
   </head>
   <body>
-    <h1>Register</h1>
-    <form action = "/reg" method="POST">
+    <h1>Input the Following into the Text Boxes</h1>
+    <form action = "/reg" method="POST" id="cat">
       Username: <input type="text" name="user">
-       Password: <input type="password" name="password">
-       <input type="submit" name="DONE">
-    </form>
-    <h1>Login</h1>
-    <form action = "/authenticate" method="POST">
-      Username: <input type="text" name="user">
-       Password: <input type="password" name="password">
-       <input type="submit" name="DONE">
-    </form>
-  <h1>{{message}}</h1>
+      Password: <input type="password" name="password">
+      <br>
+      <button type="submit" form="cat" value="reg" name="submit">Register</button>
+      <button type="submit" form="cat" value="log" name="submit">Log In</button>   
+    </form> 
+    <h1>{{message}}</h1>
 </HTML>

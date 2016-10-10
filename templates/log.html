@@ -6,9 +6,9 @@
   <body>
     <center>
       <h1>Hello {{user}}, thanks for using my website... now feel free to log out</h1>
-      <form action="/logout" methods="POST">
-	<input type="submit" name="done">
+      <form action="/logout" methods="POST" id="form">
       </form>
+      <button type="submit" form="form" value="Submit">Log Out</button>
     </center>
   </body>
 </HTML>
