@@ -19,7 +19,7 @@ def register():
         return redirect(url_for("loggedIn"))
     h = hashlib.md5()
     mark = utils.login.createDict()
-    if request.form["user"] in mark:
+    if request.form["user"] in mark.keys():
         return render_template("home.html", message="Username already taken")
     elif request.form["user"] == "":
         return render_template("home.html", message="Blank username not allowed")
@@ -55,13 +55,10 @@ def loggedIn():
 @app.route("/logout")
 def logout():
     if len(session.keys()) == 0:
-<<<<<<< HEAD
         return redirect(url_for("foo"))
-=======
-        return render_template("home.html")
->>>>>>> 70df96dd43b75fdf53a435db8239ad7b4edab15d
     session.pop(app.secret_key)
-    return redirect(url_for("foo"))
+    return render_template("home.html")
+
 
 if(__name__ == "__main__"):
     app.debug = True
